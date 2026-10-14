@@ -60,7 +60,13 @@ window.addEventListener('DOMContentLoaded', async function () {
      `;
     }
   } catch (error) {
-    console.log(error);
+    console.error('Unable to fetch product:', error);
+    centerDOM.innerHTML = `
+      <div>
+        <h3 class="error">Sorry, this product could not be loaded.</h3>
+        <a href="index.html" class="btn">back home</a>
+      </div>
+    `;
   }
 
   loading.style.display = 'none';

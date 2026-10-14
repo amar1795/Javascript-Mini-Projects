@@ -10,11 +10,16 @@ import { getElement } from './src/utils.js';
 
 const init = async () => {
   const products = await fetchProducts();
-  if (products) {
+  const featuredCenter = getElement('.featured-center');
+
+  if (products.length > 0) {
     // add products to the store
     setupStore(products);
     const featured = store.filter((product) => product.featured === true);
-    display(featured, getElement('.featured-center'));
+    display(featured, featuredCenter);
+  } else {
+    featuredCenter.innerHTML =
+      '<h3 class="filter-error">Sorry, products could not be loaded.</h3>';
   }
 };
 

@@ -21,7 +21,16 @@ const init = async () => {
     const products = await fetchProducts();
     setupStore(products);
   }
-  display(store, getElement('.products-container'));
+  const productsContainer = getElement('.products-container');
+
+  if (store.length < 1) {
+    productsContainer.innerHTML =
+      '<h3 class="filter-error">Sorry, products could not be loaded.</h3>';
+    loading.style.display = 'none';
+    return;
+  }
+
+  display(store, productsContainer);
 
   setupSearch(store);
   setupCompanies(store);
